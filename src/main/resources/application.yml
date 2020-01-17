@@ -22,7 +22,7 @@ spring:
 
 rest:
   security:
-    issuer-uri: https://10.123.45.11:8543/auth/realms/Numerico
+    issuer-uri: https://54.229.183.193:8543/auth/realms/Numerico
     enabled: true
     api-matcher: "/incidents/api/**"
     cors:
