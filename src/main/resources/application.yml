@@ -1,0 +1,41 @@
+server:
+  port: 8091
+  tomcat:
+    basedir: .
+    accesslog: 
+      enabled: true
+      directory: logs
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: classpath:numerico.p12
+    key-store-password: IMEXtyuUy9
+    key-password: IMEXtyuUy9
+    key-alias: numerico
+spring:
+  application:
+    name: Incidents API
+  redis:
+    port: 6379
+    password: foobared
+    host: localhost
+
+rest:
+  security:
+    issuer-uri: https://10.123.45.11:8543/auth/realms/Numerico
+    enabled: true
+    api-matcher: "/incidents/api/**"
+    cors:
+      allowed-origins: "*"
+      allowed-headers: "*"
+      allowed-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS
+      max-age: 3600
+      
+security:
+  oauth2:
+    resource:
+      id: esb-m2m
+      token-info-uri: ${rest.security.issuer-uri}/protocol/openid-connect/token/introspect
+      user-info-uri: ${rest.security.issuer-uri}/protocol/openid-connect/userinfo
+      jwt:
+        key-value: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiFgu7cnvDrrTD0ChCOKoJaa5w2fVZqNDv3vcJTeWVknG/rJRs+fYdl7ATiIbCntT6eEIBdVri9ZhyecvktkC+bwse4EIN/VKTwu5HFkB6nNRQaHeTLxvuIxfWvEaDHJpZDyMs7cJIPMxy6KU4CoYf78vJXjxEcKZ+Mk9fvqB1NNF4Xbp8orAjvLI1VRUibPCS6487RAzeb00hwhrm5QbtYQMxZbFh82G1jBpsOSFzNFsPTzihrGV21/NjL3QUTutoof7Jr7d12cp87knVrtorNjx1mGpUgZAJEytJwkOBJI0H8gJBXG5KeyK/xrltYqaU0aJbRuY4q0ucZt1Anu3ZQIDAQAB\n-----END PUBLIC KEY-----"      
